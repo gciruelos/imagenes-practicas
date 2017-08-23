@@ -1,7 +1,6 @@
-from PIL import Image
 import numpy as np
+from PIL import Image
 from sys import argv
-from math import log
 
 im1 = np.asarray(Image.open(argv[1]).convert('L'))
 umbral = int(argv[2])
