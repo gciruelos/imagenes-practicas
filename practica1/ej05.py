@@ -1,5 +1,5 @@
 '''
-Implementar una funci ́on que devuelva el histograma de niveles de gris de una
+Implementar una funcion que devuelva el histograma de niveles de gris de una
 imagen.
 '''
 
