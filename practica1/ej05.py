@@ -1,6 +1,9 @@
 '''
 Implementar una funcion que devuelva el histograma de niveles de gris de una
 imagen.
+
+Modo de uso:
+  python3 ej05.py <img1>
 '''
 
 import numpy as np

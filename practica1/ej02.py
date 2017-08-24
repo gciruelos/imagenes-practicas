@@ -1,3 +1,9 @@
+'''
+Implementar una función que devuelva el negativo de una imagen.
+
+Modo de uso:
+  python3 ej02.py <img1>
+'''
 import numpy as np
 from PIL import Image
 from sys import argv

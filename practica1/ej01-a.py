@@ -1,3 +1,9 @@
+'''
+Suma, resta y producto de imágenes.
+
+Modo de uso:
+  python3 ej01-a.py <img1> <img2>
+'''
 from PIL import Image
 import numpy
 from sys import argv

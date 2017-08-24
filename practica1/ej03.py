@@ -1,3 +1,9 @@
+'''
+Implementar una función que aplique un umbral a una imagen, devolviendo una imagen binaria.
+
+Modo de uso:
+  python3 ej03.py <img1> <umbral>
+'''
 import numpy as np
 from PIL import Image
 from sys import argv

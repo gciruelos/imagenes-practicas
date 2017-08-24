@@ -1,6 +1,9 @@
 '''
 Fraccionamiento de los planos de bits: hacer un programa que separe una imagen
 en los 8 planos de bits y mostrarlos cada uno por separado
+
+Modo de uso:
+  python3 ej04.py <img1>
 '''
 import numpy as np
 from PIL import Image

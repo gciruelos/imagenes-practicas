@@ -1,3 +1,9 @@
+'''
+Compresión del rango dinámico.
+
+Modo de uso:
+  python3 ej01-c.py <img1>
+'''
 import numpy as np
 from PIL import Image
 from sys import argv
