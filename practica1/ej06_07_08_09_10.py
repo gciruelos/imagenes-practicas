@@ -28,12 +28,15 @@ def histogram(img):
 # Ejercicio 6
 def naive_hist(im):
     s_min = 255
+    s_max = 0
     for p in np.nditer(im):
         if p < s_min: s_min = p
+        if p > s_max: s_max = p
     def scale(r):
         r = float(r) / 255
+        smax = float(s_max) / 255
         smin = float(s_min) / 255
-        return float(L - 1) * (r - smin) / (1 - smin) + 0.5
+        return float(L - 1) * (r - smin) / (smax - smin) + 0.5
     f = np.vectorize(scale)
     return f(im)
 
@@ -83,26 +86,35 @@ def lambda_hist(im, lam = 2.0):
     return f(im)
 
 
-
-im4 = np.uint8(naive_hist(im1))
-side_by_side.sbys_histogram([im1, im4], ['original', 'naive equalization'])
-
 im2 = np.uint8(uniform_hist(im1))
 im3 = np.uint8(uniform_hist(uniform_hist(im1)))
-side_by_side.sbys_histogram([im1, im2, im3],
-							['original', 'uniform equalization', 'uniform^2 equalization'])
-
+im4 = np.uint8(naive_hist(im1))
 im5 = np.uint8(normal_hist(im1))
-side_by_side.sbys_histogram([im1, im5], ['original', 'normal equalization'])
-
 im6 = np.uint8(lambda_hist(im1, 2))
 im7 = np.uint8(lambda_hist(im1, 5))
 im8 = np.uint8(lambda_hist(im1, 10))
-side_by_side.sbys_histogram([im1, im6, im7, im8],
-							['original', 'lambda = 2', 'lambda = 5', 'lambda = 10'])
 
-side_by_side.sbys_histogram([im1, im2, im5, im6],
-             ['original', 'uniform equalization', 'normal equalization', 'lambda = 2'])
+if argv[2] == '6':
+    side_by_side.sbys_histogram([im1, im4], ['original', 'naive equalization'],
+                                argv[3] if len(argv) > 3 else None)
+
+if argv[2] == '7' or argv[2] == '8':
+    side_by_side.sbys_histogram([im1, im2, im3],
+                                ['original', 'uniform equalization', 'uniform^2 equalization'],
+                                argv[3] if len(argv) > 3 else None)
+if argv[2] == '9':
+    side_by_side.sbys_histogram([im1, im5], ['original', 'normal equalization'],
+                                argv[3] if len(argv) > 3 else None)
+
+if argv[2] == 'lambda':
+    side_by_side.sbys_histogram([im1, im6, im7, im8],
+                                ['original', 'lambda = 2', 'lambda = 5', 'lambda = 10'],
+                                argv[3] if len(argv) > 3 else None)
+
+if argv[2] == '10':
+    side_by_side.sbys_histogram([im1, im2, im5, im6],
+             ['original', 'uniform\nequalization', 'normal\nequalization', 'lambda = 2'],
+             argv[3] if len(argv) > 3 else None)
 
 ''' 
 Ejercicio 9: LIM (capitulo 7)

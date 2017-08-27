@@ -1,3 +1,4 @@
+.PHONY = clean view-informe
 
 informe.pdf: informe.tex informe-imgs/*
 	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make informe.tex

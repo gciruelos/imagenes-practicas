@@ -9,7 +9,7 @@
 \usepackage{graphicx}
 
 % Margenes
-\usepackage[left=2cm,right=2cm,top=2cm,bottom=1.5cm]{geometry}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 %Espaciado
 %\linespread{1.3}
 
@@ -149,15 +149,124 @@ Modo de uso
 
 \begin{figure}[H]
 \centering
-  \includegraphics[width=6cm]{informe-imgs/ej05-1.pdf}
+  \includegraphics[height=6cm]{informe-imgs/ej05-1.pdf}
   \caption{\texttt{python3 practica1/ej05.py Fig30.jpg}}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-  \includegraphics[width=6cm]{informe-imgs/ej05-2.pdf}
+  \includegraphics[height=6cm]{informe-imgs/ej05-2.pdf}
   \caption{\texttt{python3 practica1/ej05.py Fig46.jpg}}
 \end{figure}
 
-\end{document}
 
+\section{Ejercicio 6.}
+Ecualización ``naive'': se encuentran los valores mínimos y máximos y se le aplica al histograma la transformación
+lineal que envía el mínimo al 0 y el máximo a 255.
+
+Modo de uso
+\begin{verbatim}
+    python3 ej06_07_08_09_10.py <img> 6
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[height=6cm]{informe-imgs/ej06-1.pdf}
+  \caption{\texttt{python3 practica1/ej06\_07\_08\_09\_10.py Fig10.jpg 6}}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[height=6cm]{informe-imgs/ej06-2.pdf}
+  \caption{\texttt{python3 practica1/ej06\_07\_08\_09\_10.py Fig30.jpg 6}}
+\end{figure}
+
+
+\section{Ejercicio 7 y Ejercicio 8.}
+Ecualización uniforme: se considera la variable aleatoria que sale de mirar el histograma de la imagen y se la
+transforma en una variable aleatoria uniforme. 
+
+Como el resultado es uniforme, esta operación es idempotente
+(aplicar de nuevo la ecualización uniforme va a dejar la misma variable aleatoria,
+pues ya era uniforme),
+con lo cual aplicar la transformación de nuevo no cambiará la imagen.
+
+Modo de uso
+\begin{verbatim}
+    python3 ej06_07_08_09_10.py <img> 7
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[height=6cm]{informe-imgs/ej07-1.pdf}
+  \caption{\texttt{python3 practica1/ej06\_07\_08\_09\_10.py Fig10.jpg 7}}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[height=6cm]{informe-imgs/ej07-2.pdf}
+  \caption{\texttt{python3 practica1/ej06\_07\_08\_09\_10.py Fig30.jpg 7}}
+\end{figure}
+
+
+\section{Ejercicio 9.}
+Ecualización uniforme: se considera la variable aleatoria que sale de mirar el histograma de la imagen y se la
+transforma en una variable aleatoria normal.
+
+Modo de uso
+\begin{verbatim}
+    python3 ej06_07_08_09_10.py <img> 9
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[height=6cm]{informe-imgs/ej09-1.pdf}
+  \caption{\texttt{python3 practica1/ej06\_07\_08\_09\_10.py Fig10.jpg 9}}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[height=6cm]{informe-imgs/ej09-2.pdf}
+  \caption{\texttt{python3 practica1/ej06\_07\_08\_09\_10.py Fig30.jpg 9}}
+\end{figure}
+
+
+\section{Ejercicio 10.}
+(...)
+
+Modo de uso
+\begin{verbatim}
+    python3 ej06_07_08_09_10.py <img> 10
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.8\textwidth]{informe-imgs/ej10-1.pdf}
+  \caption{\texttt{python3 practica1/ej06\_07\_08\_09\_10.py Fig10.jpg 10}}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.8\textwidth]{informe-imgs/ej10-2.pdf}
+  \caption{\texttt{python3 practica1/ej06\_07\_08\_09\_10.py Fig30.jpg 10}}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.8\textwidth]{informe-imgs/ej10-3.pdf}
+  \caption{\texttt{python3 practica1/ej06\_07\_08\_09\_10.py Fig46.jpg 10}}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.8\textwidth]{informe-imgs/ej10-4.pdf}
+  \caption{\texttt{python3 practica1/ej06\_07\_08\_09\_10.py Fig40.jpg 10}}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.8\textwidth]{informe-imgs/ej10-5.pdf}
+  \caption{\texttt{python3 practica1/ej06\_07\_08\_09\_10.py Fig05jpg 10}}
+\end{figure}
+
+\end{document}
