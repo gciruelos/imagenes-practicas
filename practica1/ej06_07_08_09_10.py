@@ -14,51 +14,16 @@
 import numpy as np
 from PIL import Image
 from sys import argv
+import side_by_side
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import math
 
 L = 256
+im1 = np.asarray(Image.open(argv[1]).convert('L'))
 
 def histogram(img):
-    histogram = [0 for i in range(L)]
-    nm = 0
-    for p in np.nditer(img):
-        histogram[p] += 1
-        nm += 1
-
-    for i in range(256):
-        histogram[i] = float(histogram[i]) / nm
-
-    accum = [0 for i in range(L)]
-    for i in range(256):
-        for j in range(i):
-            accum[i] += histogram[j]
-            if accum[i] > 1.0: accum[i] = 1.0
-    return histogram, accum
-
-def side_by_side(ims, titles=None):
-    imgs = list(map(Image.fromarray, ims))
-    n = len(imgs)
-    whs = list(map(lambda x: x.size, imgs))
-
-    histograms = list(map(histogram, ims))
-    gs = gridspec.GridSpec(
-        3, n, width_ratios=[1 for i in range(n)], height_ratios=[3, 1, 1])
-
-    for i in range(n):
-        plt.subplot(gs[i]).imshow(imgs[i], cmap='gray', vmin=0, vmax=255)
-    for i in range(n):
-        plt.subplot(gs[i+n]).plot(range(L), histograms[i][0])
-    for i in range(n):
-        plt.subplot(gs[i+2*n]).plot(range(L), histograms[i][1])
-    if titles is not None:
-        for i in range(n):
-            plt.subplot(gs[i]).set_title(titles[i])
-
-    plt.show()
-
-im1 = np.asarray(Image.open(argv[1]).convert('L'))
+    return side_by_side.histogram(img)
 
 # Ejercicio 6
 def naive_hist(im):
@@ -120,21 +85,23 @@ def lambda_hist(im, lam = 2.0):
 
 
 im4 = np.uint8(naive_hist(im1))
-side_by_side([im1, im4], ['original', 'naive equalization'])
+side_by_side.sbys_histogram([im1, im4], ['original', 'naive equalization'])
 
 im2 = np.uint8(uniform_hist(im1))
 im3 = np.uint8(uniform_hist(uniform_hist(im1)))
-side_by_side([im1, im2, im3], ['original', 'uniform equalization', 'uniform^2 equalization'])
+side_by_side.sbys_histogram([im1, im2, im3],
+							['original', 'uniform equalization', 'uniform^2 equalization'])
 
 im5 = np.uint8(normal_hist(im1))
-side_by_side([im1, im5], ['original', 'normal equalization'])
+side_by_side.sbys_histogram([im1, im5], ['original', 'normal equalization'])
 
 im6 = np.uint8(lambda_hist(im1, 2))
 im7 = np.uint8(lambda_hist(im1, 5))
 im8 = np.uint8(lambda_hist(im1, 10))
-side_by_side([im1, im6, im7, im8], ['original', 'lambda = 2', 'lambda = 5', 'lambda = 10'])
+side_by_side.sbys_histogram([im1, im6, im7, im8],
+							['original', 'lambda = 2', 'lambda = 5', 'lambda = 10'])
 
-side_by_side([im1, im2, im5, im6],
+side_by_side.sbys_histogram([im1, im2, im5, im6],
              ['original', 'uniform equalization', 'normal equalization', 'lambda = 2'])
 
 ''' 

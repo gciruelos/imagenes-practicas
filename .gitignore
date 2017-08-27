@@ -99,3 +99,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+
+# Latex
+*.aux
+*.fls
+*.fdb_latexmk
+*/informe.pdf
