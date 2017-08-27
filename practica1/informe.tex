@@ -16,6 +16,7 @@
 
 \title{Introducción al Procesamiento Digital de Imágenes - Práctica 1}
 \date{}
+\author{Gonzalo Ciruelos Rodríguez (LU: 63/14)}
 
 \begin{document}
 \maketitle
@@ -28,6 +29,8 @@ Luego, debe ejecutarse
     . venv/bin/activate
     pip install -r requirements.txt 
 \end{verbatim}
+
+\noindent para instalar las dependencias (pillow (para imágenes), numpy y matplotlib).
 
 
 
@@ -125,7 +128,9 @@ Modo de uso
 
 
 \section{Ejercicio 4.}
-Fraccionamiento en planos de bits.
+Fraccionamiento en planos de bits. En general los bits mas bajos van a ser más azarosos,
+y los más altos van a tener más significado
+(pues si los mas altos están en 1 quiere decir que en ese pixel la imagen es más clara).
 
 Modo de uso
 \begin{verbatim}
@@ -140,7 +145,7 @@ Modo de uso
 
 
 \section{Ejercicio 5.}
-Histogramas de una imagen. Muestra ambos el histograma y el histograma de la acumulada.
+Histogramas de una imagen. Muestra el histograma y el histograma de la probabilidad acumulada.
 
 Modo de uso
 \begin{verbatim}
@@ -213,6 +218,9 @@ Modo de uso
 Ecualización uniforme: se considera la variable aleatoria que sale de mirar el histograma de la imagen y se la
 transforma en una variable aleatoria normal.
 
+Este se ve muy parecido al anterior, pero el problema que tiene es que asume que una buena
+distribución para un histograma es la normal, cuando esto no es cierto en general.
+
 Modo de uso
 \begin{verbatim}
     python3 ej06_07_08_09_10.py <img> 9
@@ -232,7 +240,17 @@ Modo de uso
 
 
 \section{Ejercicio 10.}
-(...)
+Aquí comparamos los métodos que mostramos antes, agregando además
+el algoritmo de ecualización ajustable visto en clase (con $\lambda = 2$).
+Para probar el algoritmo con otros lambdas, puede llamarse como a continuación,
+pero reemplazando ``10'' con ``lambda''.
+
+Como podrá verse, con algunas imágenes la ecualización uniforme (o normal) anda muy bien.
+Estas imágenes son aquellas donde el histograma estaba ya más o menos bien distribuido.
+En las imágenes cuyo histograma presenta un pico muy grande en un lugar
+(por ejemplo la de la luna o la del esqueleto),
+la ecualización uniforme o normal solas no funcionan bien,
+pero al ajustarlas con $\lambda = 2$ se ven mucho mejor.
 
 Modo de uso
 \begin{verbatim}
