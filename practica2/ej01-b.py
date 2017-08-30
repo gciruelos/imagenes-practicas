@@ -1,4 +1,3 @@
-
 import numpy as np
 from PIL import Image
 from sys import argv
@@ -11,18 +10,12 @@ def histogram(im):
 
 
 def uniform_hist(im):
-    dom, histogram_r, accum_r, histogram_g, accum_g, histogram_b, accum_b  = histogram(im)
+    histogram_r, accum_r, histogram_g, accum_g, histogram_b, accum_b  = histogram(im)
     def w_dot(r):
         wr = accum_r[r[0]]
         wg = accum_g[r[1]]
         wb = accum_b[r[2]]
         return list(map(lambda w: int(w * L - 0.5), [wr, wg, wb]))
-        # # Es mas lento hacer:
-        # for n in range(L):
-        #     if n+1 >= int(w * L + 0.4999):
-        #         if n != n_: print (w, L, w*L, n, n_)
-        #         return n
-        # print(L, n, w, r)
     ret = im.copy()
     for i in range(ret.shape[0]):
         for j in range(ret.shape[1]):
@@ -30,6 +23,4 @@ def uniform_hist(im):
     return ret
 
 im1 = np.asarray(Image.open(argv[1]).convert('RGB'))
-side_by_side.sbys_histogram([im1, uniform_hist(im1)], ['rgb']) 
-print(im1)
-
+side_by_side.sbys_histogram([im1, uniform_hist(im1)], ['rgb', 'rgb']) 
