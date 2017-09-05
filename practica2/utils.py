@@ -17,7 +17,7 @@ def to_hsi(img):
                 h = cuenta_h
             else:
                 h = 2*np.pi - cuenta_h
-            s = 1.0 - 3.0 * float(min(r,g,b)) / float(r + g + b)
+            s = 1.0 - 3.0 * float(min(r,g,b)) / (EPS + float(r + g + b))
             i = float(r + g + b) / 3.0
             imgr[i_, j_] = [h, s, i]
     return imgr
@@ -39,6 +39,9 @@ def hsi_to_rgb(hsi):
         b = i * (1 + s * np.cos(h - 4.0*np.pi/3.0) / np.cos(np.pi/3.0 - (h - 4.0*np.pi/3.0)))
         g = i * (1 - s)
         r = 3 * i - (g + b)
+    if r > 1.0: print(hsi, 'r', r)
+    if g > 1.0: print(hsi, 'g', g)
+    if b > 1.0: print(hsi, 'b', b)
     r = min(int(256 * r - 0.5), 255)
     g = min(int(256 * g - 0.5), 255)
     b = min(int(256 * b - 0.5), 255)

@@ -23,4 +23,4 @@ def uniform_hist(im):
     return ret
 
 im1 = np.asarray(Image.open(argv[1]).convert('RGB'))
-side_by_side.sbys_histogram([im1, uniform_hist(im1)], ['rgb', 'rgb']) 
+side_by_side.sbys_histogram([im1, uniform_hist(im1)], ['rgb', 'rgb'],argv=argv[2] if len(argv)>2 else None)
