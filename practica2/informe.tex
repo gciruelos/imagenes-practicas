@@ -287,20 +287,45 @@ $c = 4.5$
   \includegraphics[height=6cm]{informe-imgs/ej03-6.pdf}
   \caption{\texttt{python3 practica1/ej03-a.py 4.5 test/imagenesClaseColor/1901xx.png --end}}
 \end{figure}
-\end{document}
 
-
-oooo
 \newpage
 
-asdasd
 \section{Ejercicio 4.}
 
-\subsection{Dónde son mas visibles los detalles}
+\subsection{Ejercicio 4.a. Dónde son mas visibles los detalles y el ruido.}
 \begin{figure}[H]
 \centering
-  \includegraphics[height=6cm]{informe-imgs/ej04-1.pdf}
+  \includegraphics[height=8cm]{informe-imgs/ej04-1.pdf}
   \caption{\texttt{python3 practica1/ej01-c.py test/imagenesClaseColor/1901xx.png}}
 \end{figure}
+\begin{figure}[H]
+\centering
+  \includegraphics[height=8cm]{informe-imgs/ej04-2.pdf}
+  \caption{\texttt{python3 practica1/ej01-c.py test/imagenesClaseColor/1901xx.png}}
+\end{figure}
+\begin{figure}[H]
+\centering
+  \includegraphics[height=8cm]{informe-imgs/ej04-3.pdf}
+  \caption{\texttt{python3 practica1/ej01-c.py test/imagenesClaseColor/1923xx.png}}
+\end{figure}
+
+Como puede observarse, los detalles se notan más en el canal I, o sea, en la intensidad.
+Por otro lado, el ruido se observa más en el canal S, de saturación: a más ruido menos saturación.
+
+\subsection{Ejercicio 4.b. Dónde afectan más los bordes difuminados.}
+\begin{figure}[H]
+\centering
+  \includegraphics[height=8cm]{informe-imgs/ej04-4.pdf}
+  \caption{\texttt{python3 practica1/ej01-c.py test/imagenesClaseColor/1908xxx.png}}
+\end{figure}
+\begin{figure}[H]
+\centering
+  \includegraphics[height=8cm]{informe-imgs/ej04-5.pdf}
+  \caption{\texttt{python3 practica1/ej01-c.py test/imagenesClaseColor/1908xx.png}}
+\end{figure}
+
+Los bordes difuminados se notan más en el canal S, de saturación, pues los bordes difuminados tienen baja saturación (no
+hay colores puros).
+
 \end{document}
 
