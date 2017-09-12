@@ -27,6 +27,12 @@ def hsi_to_rgb(hsi):
     h = hsi[0]
     s = hsi[1]
     i = hsi[2]
+    # arreglo de potenciales problemas (coordenadas fuera del cono).
+    if i > 0.5 and s > 2 - 0.5 * i:
+        s = 2 - 0.5 * i
+    if i < 0.5 and s > 2 * i:
+        s = 2 * i
+
     if h < 2.0 * np.pi / 3.0:
         r = i * (1 + s * np.cos(h)                 / np.cos(np.pi/3.0 - h))
         b = i * (1 - s)

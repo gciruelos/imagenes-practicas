@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import numpy as np
+import sys
 from PIL import Image
 
 L = 256
@@ -87,11 +88,15 @@ def histogram_hsi(img):
     return histogram_h, accum_h, histogram_s, accum_s, histogram_i, accum_i
 
 def sbys_histogram(ims, mode, titles=None, argv=None):
+    plt.figure(figsize=(16, 10))
     if argv == '--end':
         gs = gridspec.GridSpec(1, 2)
         plt.subplot(gs[0]).imshow(ims[0])
         plt.subplot(gs[1]).imshow(ims[-1])
-        plt.show()
+        if len(sys.argv) > sys.argv.index('--end') + 1:
+            plt.savefig(sys.argv[sys.argv.index('--end') + 1], bbox_inches='tight')
+        else:
+            plt.show()
         return
     n = len(ims)
     gs = gridspec.GridSpec(
