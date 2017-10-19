@@ -55,4 +55,4 @@ im2, im3 = mod_and_phase(dft_im1)
 print(im2)
 print(im3)
 
-side_by_side.sbysfourier([im1, im2, im3])
+side_by_side.sbysfourier([im1, im2, im3], argv=None if len(argv) < 3 else argv[2])

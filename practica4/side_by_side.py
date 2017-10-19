@@ -38,6 +38,7 @@ def sbysfourier(imgs, titles=None, argv=None, m=1):
     gs = gridspec.GridSpec(m, n // m)
     imgs[1] = process_mod(imgs[1])
 
+    plt.figure(figsize=(10,5))
     plt.subplot(gs[0]).imshow(imgs[0], cmap='gray', vmin=0, vmax=255)
     plt.subplot(gs[1]).imshow(imgs[1], cmap='gray')
     plt.subplot(gs[2]).imshow(imgs[2], cmap='gray', vmin=-np.pi, vmax=np.pi)
@@ -53,7 +54,6 @@ def sbys3(imgs, titles=None, argv=None, m=1):
     whs = list(map(lambda x: x.size, imgs))
     n = len(whs)
     gs = gridspec.GridSpec(m, n // m)
-
     plt.subplot(gs[0]).imshow(imgs[0], cmap='gray', vmin=0, vmax=255)
     plt.subplot(gs[1]).imshow(imgs[1], cmap='gray', vmin=0, vmax=255)
     plt.subplot(gs[2]).imshow(imgs[2], cmap='gray', vmin=0, vmax=255)

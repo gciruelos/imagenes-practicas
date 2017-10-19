@@ -1,11 +1,11 @@
-#  python practica4/ej4.py <img1> <img2>
+#  python practica4/ej5.py <img1> <img2>
+
 import numpy as np
 import cmath
 import math
 from PIL import Image
 from sys import argv
 import side_by_side
-
 
 
 def fft2d(img):
@@ -31,26 +31,32 @@ def from_mod_and_phase(mod, phase):
             total[k1, k2] = cmath.rect(mod[k1, k2], phase[k1, k2])
     return total
 
-
+# Lena
 im1 = np.asarray(Image.open(argv[1]).convert('L'))
-im2 = np.asarray(Image.open(argv[2]).convert('L'))
 dft_im1 = fft2d(im1)
-dft_im2 = fft2d(im2)
 im1mod, im1phase = mod_and_phase(dft_im1)
+
+# Lineas
+im2 = np.asarray(Image.open(argv[2]).convert('L'))
+dft_im2 = fft2d(im2)
 im2mod, im2phase = mod_and_phase(dft_im2)
 
-im3 = ifft2d(from_mod_and_phase(im1mod, im2phase))
-im4 = ifft2d(from_mod_and_phase(im2mod, im1phase))
+# Suma
+suma = im1 + np.minimum(255 - im1, im2)
+dft_suma = fft2d(suma)
+sumamod, sumaphase = mod_and_phase(dft_suma)
 
-print(im1mod)
+res = ifft2d(from_mod_and_phase(sumamod -im2mod + im1mod, sumaphase ))
+dft_res = fft2d(res)
+resmod, resphase = mod_and_phase(dft_res)
 
 if len(argv) < 4:
-    side_by_side.sbysfourier([im1, im1mod, im1phase])
-    side_by_side.sbysfourier([im2, im2mod, im2phase])
-    side_by_side.sbys3([im1, im2, im3], ['im1', 'im2', 'im1mod, im2phase'])
-    side_by_side.sbys3([im1, im2, im4], ['im1', 'im2', 'im2mod, im1phase'])
+    side_by_side.sbysfourier([im1, im1mod, im1phase]) 
+    side_by_side.sbysfourier([im2, im2mod, im2phase]) 
+    side_by_side.sbysfourier([suma, sumamod, sumaphase])
+    side_by_side.sbysfourier([res, resmod, resphase]) 
 else:
-    side_by_side.sbysfourier([im1, im1mod, im1phase], argv="informe-imgs/ej4-lena.pdf")
-    side_by_side.sbysfourier([im2, im2mod, im2phase], argv="informe-imgs/ej4-ladrillos.pdf")
-    side_by_side.sbys3([im1, im2, im3], ['im1', 'im2', 'im1mod, im2phase'], argv="informe-imgs/ej4-a.pdf")
-    side_by_side.sbys3([im1, im2, im4], ['im1', 'im2', 'im2mod, im1phase'], argv="informe-imgs/ej4-b.pdf")
+    side_by_side.sbysfourier([im1, im1mod, im1phase], argv="informe-imgs/ej5-lena.pdf") 
+    side_by_side.sbysfourier([im2, im2mod, im2phase], argv="informe-imgs/ej5-lineas.pdf") 
+    side_by_side.sbysfourier([suma, sumamod, sumaphase], argv="informe-imgs/ej5-suma.pdf") 
+    side_by_side.sbysfourier([res, resmod, resphase], argv="informe-imgs/ej5-res.pdf") 
