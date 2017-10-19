@@ -15,5 +15,8 @@ practica2-063_14.zip:
 	zip -9 -r practica2-063_14.zip informe.pdf requirements.txt practica2/*.py
 	rm -f informe.pdf
 
+practica4-063_14.zip:
+	zip -9 -r practica4-063_14.zip requirements.txt practica4/*.py
+
 clean:
 	rm -f practica*.zip
