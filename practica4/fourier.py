@@ -1,5 +1,4 @@
-'''
-'''
+# python practica4/fourier.py <img>
 import numpy as np
 import cmath
 import math
@@ -8,8 +7,6 @@ from sys import argv
 import side_by_side
 
 L = 255
-
-
 
 def dft2d(img):
     N1, N2 = img.shape
