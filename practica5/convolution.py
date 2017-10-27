@@ -49,5 +49,7 @@ def scale(img):
 
 def apply_threshold(img, t):
     idx = img[:,:] < t
-    img[idx] = 0
+    img[idx] = t
+    img[:,:] *= 255. / (255. - t)
+    img[:,:] -= t * 255. / (255. - t)
     return img

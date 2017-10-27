@@ -41,7 +41,7 @@ def border_detection(img, kernelx, kernely):
     imx = np.power(imx, 2)
     imy = np.power(imy, 2)
     r = convolution.scale(np.power(imx+imy, 0.5))
-    convolution.apply_threshold(r, 100)
+    convolution.apply_threshold(r, 150)
     return r
 
 if argv[2] == "roberts":
