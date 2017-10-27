@@ -16,7 +16,11 @@ practica2-063_14.zip:
 	rm -f informe.pdf
 
 practica4-063_14.zip:
-	zip -9 -r practica4-063_14.zip requirements.txt practica4/*.py
+	make -C practica4 informe.pdf
+	mv practica4/informe.pdf informe.pdf
+	make -C practica4 clean
+	zip -9 -r practica4-063_14.zip informe.pdf requirements.txt practica4/*.py practica4/imgs-ej3/*.png
+	rm -f informe.pdf
 
 clean:
 	rm -f practica*.zip

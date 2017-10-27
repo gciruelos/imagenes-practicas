@@ -37,7 +37,7 @@ Luego, debe ejecutarse
 
 
 
-\section{Ejercicio 1.}
+\section{Ejercicio 1}
 
 Transformadas de Fourier graficadas.
 
@@ -113,6 +113,11 @@ La matriz es de $8\times 8\times 8\times 8$, pero los puntos en el plano complej
 
 \newpage
 \section{Ejercicio 2}
+Modo de uso
+\begin{verbatim}
+    python3 practica4/ej2.py
+\end{verbatim}
+
 Supongamos que lo hacemos con la señal propuesta, o sea $x = [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]$.
 
 \begin{figure}[H]
@@ -159,13 +164,25 @@ Esto no cambia mucho la señal, pues las frecuencias intermedias ya eran bastant
 \newpage
 \section{Ejercicio 3}
 
+Este ejercicio se basa en hacer la DFT y la IDFT de cada imagen propuesta. Omitimos la IDFT porque da igual que la
+imagen original.
+Para cada imagen, mostramos esa imagen, el módulo de la transformada de fourier y la fase.
+
+Modo de uso
+\begin{verbatim}
+    python3 practica4/fourier.py <img>
+\end{verbatim}
+
+Por ejemplo, para la imagen de Lena el resultado sería este:
+
 \begin{figure}[H]
 \centering
   \includegraphics[height=6cm]{informe-imgs/ej3-lena.pdf}
-  \caption{\texttt{python practica4/fourier.py lena}}
+  \caption{\texttt{python practica4/fourier.py lena.png}}
 \end{figure}
 
 \subsection{a) un cuadrado central}
+Primero tenemos el cuadrado central.
 \begin{figure}[H]
 \centering
   \includegraphics[height=6cm]{informe-imgs/ej3-a.pdf}
@@ -173,6 +190,9 @@ Esto no cambia mucho la señal, pues las frecuencias intermedias ya eran bastant
 \end{figure}
 
 \subsection{b) un cuadrado transladado}
+
+Luego tenemos el cuadrado transladado. Notar que tiene sentido que el módulo haya dado igual en la imágen anterior que
+en esta, pues como consideramos señales ``periódicas'' entonces las señales son las mismas.
 \begin{figure}[H]
 \centering
   \includegraphics[height=6cm]{informe-imgs/ej3-b.pdf}
@@ -194,6 +214,10 @@ Esto no cambia mucho la señal, pues las frecuencias intermedias ya eran bastant
 \end{figure}
 
 \subsection{e) una línea vertical}
+Notar que en las imágenes de la línea vertical, la fase está orientada de la misma manera que la linea.
+
+Además, el gráfico del módulo es una tiene una linea dominante perpendicular a la linea original. Esto se debe a que las
+frecuencias dominantes de la señal original son exactamente aquellas perpendiculares a la línea recta original.
 \begin{figure}[H]
 \centering
   \includegraphics[height=6cm]{informe-imgs/ej3-e.pdf}
@@ -215,6 +239,8 @@ Esto no cambia mucho la señal, pues las frecuencias intermedias ya eran bastant
 \end{figure}
 
 \subsection{h) varias líneas vertical}
+En estas imágenes sucede algo muy similar a lo que sucedía para las imágenes de una linea, pero aquí tenemos una señal
+de período mas corto, luego el gráfico de fourier va a ser muy similar pero con período más corto
 \begin{figure}[H]
 \centering
   \includegraphics[height=6cm]{informe-imgs/ej3-h.pdf}
@@ -238,6 +264,13 @@ Esto no cambia mucho la señal, pues las frecuencias intermedias ya eran bastant
 \newpage
 \section{Ejercicio 4}
 
+Este ejercicio pide tomar el módulo y la fase de las transformadas de Fourier de dos imágenes y combinarlas.
+
+Modo de uso
+\begin{verbatim}
+    python3 practica4/ej4.py <img1> <img2>
+\end{verbatim}
+
 \begin{figure}[H]
 \centering
   \includegraphics[height=6cm]{informe-imgs/ej4-lena.pdf}
@@ -250,6 +283,12 @@ Esto no cambia mucho la señal, pues las frecuencias intermedias ya eran bastant
   \caption{\texttt{python ej4.py lena.png ladrillos.png}}
 \end{figure}
 
+Como se ve, la fase es muy importante para que se obtenga la figura que la transformada de fourier representa.
+
+En la primera imagen, combinamos el módulo de lena con la fase de ladrillos, con lo cual vemos más notoriamente las
+figuras de los ladrillos.
+En la segunda, combinamos el módulo de la imagen de los ladrillos con la fase de la imagen de lena, con lo cual la
+imagen de lena es mas visible en el resultado final.
 \begin{figure}[H]
 \centering
   \includegraphics[height=6cm]{informe-imgs/ej4-a.pdf}
@@ -266,6 +305,13 @@ Esto no cambia mucho la señal, pues las frecuencias intermedias ya eran bastant
 
 \newpage
 \section{Ejercicio 5}
+
+En este ejercicio debemos combinar la imagen de Lena con la imagen de líneas, y luego recuperar a Lena usando la DFT.
+
+Modo de uso
+\begin{verbatim}
+    python3 practica4/ej5.py <img1> <img2>
+\end{verbatim}
 
 
 \begin{figure}[H]
@@ -285,6 +331,14 @@ Esto no cambia mucho la señal, pues las frecuencias intermedias ya eran bastant
   \includegraphics[height=6cm]{informe-imgs/ej5-suma.pdf}
   \caption{\texttt{python ej5.py lena.png lineas.png}. Suma de lena y líneas.}
 \end{figure}
+
+Allí tenemos la suma de las imágenes.
+
+Para recuperar la imagen original intenté varias cosas. Basándome en el ejercicio anterior me enfoque en la fase de la
+imagen, pero eso no llegó a ningun resultado positivo.
+
+Sin embargo, tomar el DFT de la suma y modificar el módulo, restándole el de las líneas y sumándole el de lena mejora la
+imagen bastante, y el resultado es el que está a continuación.
 
 \begin{figure}[H]
 \centering

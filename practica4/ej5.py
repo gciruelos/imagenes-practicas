@@ -42,11 +42,21 @@ dft_im2 = fft2d(im2)
 im2mod, im2phase = mod_and_phase(dft_im2)
 
 # Suma
-suma = im1 + np.minimum(255 - im1, im2)
+suma = np.zeros(im1.shape, dtype=np.float)
+maximum = 0.0
+minimum = 0.0
+for k1 in range(im1.shape[0]):
+    for k2 in range(im1.shape[1]):
+        r = 0.0 + im1[k1,k2] + im2[k1, k2]
+        if r > maximum: maximum = r
+        if r < minimum: minimum = r
+        suma[k1,k2] = r
+suma = np.vectorize(lambda x : 255 * (x - minimum) / (maximum - minimum))(suma)
+suma = suma.astype(np.uint8) 
 dft_suma = fft2d(suma)
 sumamod, sumaphase = mod_and_phase(dft_suma)
 
-res = ifft2d(from_mod_and_phase(sumamod -im2mod + im1mod, sumaphase ))
+res = ifft2d(from_mod_and_phase(sumamod -im2mod + im1mod, sumaphase))
 dft_res = fft2d(res)
 resmod, resphase = mod_and_phase(dft_res)
 
