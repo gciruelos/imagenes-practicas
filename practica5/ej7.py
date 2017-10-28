@@ -1,10 +1,11 @@
-#  python practica5/ej7.py <img1> <roberts|prewitt|sobel> <x|y>
+#  python practica5/ej7.py <img1> <roberts|prewitt|sobel> <param_gauss> <param_salt_pepper>
 import numpy as np
 import math
 from PIL import Image
 from sys import argv
 import side_by_side
 import convolution
+import ej4
 
 robertsx = np.zeros((2,2), dtype=np.float)
 robertsx[:,:] = [[1,0],
@@ -40,21 +41,30 @@ def border_detection(img, kernelx, kernely):
 
     imx = np.power(imx, 2)
     imy = np.power(imy, 2)
-    r = convolution.scale(np.power(imx+imy, 0.5))
+    r = convolution.scale(np.power(imx+imy, 0.5)) / np.sqrt(2)
     convolution.apply_threshold(r, 150)
     return r
 
+
+im1 = np.asarray(Image.open(argv[1]).convert('L'))
+im3 = ej4.gaussiano(im1, float(argv[3])) 
+im5 = ej4.salt_and_pepper(im1, float(argv[4])) 
 if argv[2] == "roberts":
-    im1 = np.asarray(Image.open(argv[1]).convert('L'))
     im2 = border_detection(im1, robertsx, robertsy)
+    im4 = border_detection(im3, robertsx, robertsy)
+    im6 = border_detection(im5, robertsx, robertsy)
 elif argv[2] == "prewitt":
-    im1 = np.asarray(Image.open(argv[1]).convert('L'))
     im2 = border_detection(im1, prewittx, prewitty)
+    im4 = border_detection(im3, prewittx, prewitty)
+    im6 = border_detection(im5, prewittx, prewitty)
 elif argv[2] == "sobel":
-    im1 = np.asarray(Image.open(argv[1]).convert('L'))
     im2 = border_detection(im1, sobelx, sobely)
+    im4 = border_detection(im3, sobelx, sobely)
+    im6 = border_detection(im5, sobelx, sobely)
 
-print(im1)
-print(im2)
-
-side_by_side.sbys([im1, im2])
+side_by_side.sbys([im1, im2, im3, im4, im5, im6],
+                  ["Original", "Filtro "+argv[2],
+                   "Ruido gaussiano: normal(0,"+argv[3]+")", "Filtro "+argv[2],
+                   "Ruido salt & pepper: p = "+argv[4], "Filtro "+argv[2]],
+                  argv=None if len(argv) <= 5 else argv[5],
+                  m=3)

@@ -26,10 +26,7 @@ def convolution(img, kernel):
             if resultado < minimum: minimum = resultado 
             rf[index[0], index[1]] = resultado
     print(maximum, minimum)
-    for k1 in range(K1):
-        for k2 in range(K2):
-            r[k1,k2] = (rf[k1, k2] - minimum) * 255.0 / (maximum - minimum)
-    return r
+    return rf
 
 
 
@@ -48,8 +45,6 @@ def scale(img):
     return r
 
 def apply_threshold(img, t):
-    idx = img[:,:] < t
-    img[idx] = t
-    img[:,:] *= 255. / (255. - t)
-    img[:,:] -= t * 255. / (255. - t)
+    idx = img[:,:] >= t
+    img[idx] = 255
     return img
