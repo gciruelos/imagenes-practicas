@@ -19,6 +19,7 @@ def uniform_hist(im):
     ret = im.copy()
     for i in range(ret.shape[0]):
         for j in range(ret.shape[1]):
+            print(i,j)
             ret[i][j] = w_dot(ret[i][j])
     return ret
 
