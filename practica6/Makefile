@@ -7,7 +7,7 @@ informe.pdf: informe.tex $(IMGS_JPG) $(wildcard ej1-imgs/*.png)
 	ls -lha informe.pdf
 
 informe-imgs/%.jpg: informe-imgs/%.pdf
-	convert -density 100 $< -quality 80 $@
+	convert -density 70 $< -quality 50 $@
 
 view-informe: informe.pdf
 	zathura informe.pdf &
