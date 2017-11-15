@@ -345,6 +345,11 @@ Como puede apreciarse, los resultados son muchísimo mejores, sobre todo en las 
 \newpage
 \section{Ejercicio 3: Filtro de Kirsch}
 
+Modo de uso
+\begin{verbatim}
+    python3 practica6/ej3.py <img>
+\end{verbatim}
+
 El filtro de Kirsch se basa en aplicar los siguientes operadores a la imágen y luego tomar el máximo entre todos ellos. Cada operador tiene una dirección, N, NE, E, SE, S, SO, O, NO. 
 
 \[
@@ -443,9 +448,14 @@ Como puede verse, los resultados son muy buenos en las imágenes originales. Sin
 \end{figure}
 
 \newpage
-\section{Ejercicio 4: Algoritmo de Cany}
+\section{Ejercicio 4: Algoritmo de Canny}
 
-El algoritmo de Cany se basa en los siguientes pasos.
+Modo de uso
+\begin{verbatim}
+    python3 practica6/ej4.py <img> <roberts|prewitt|sobel>
+\end{verbatim}
+
+El algoritmo de Canny se basa en los siguientes pasos.
 
 \begin{enumerate}
 \item Aplicarle un filtro gaussiano a la imagen. Esto lo que logra es suavizarla de manera que los filtros detectores de bordes funcionen mejor.
@@ -703,6 +713,13 @@ Las matrices del filtro de Sobel son las siguientes.
 
 \newpage
 \subsection{Conclusión}
+
+Como puede observarse, todos los filtros andan muy bien para las imágenes sin ruido. Detectan los bordes a la perfección en esos casos, y los filtros que dan son muy adecuados: son angostos pero no están quebrados.
+
+Además, para el caso de ruido gaussiano con media 10 también son resilientes y andan muy bien, casi seguramente debido al filtro gaussiano que se le pasa antes de empezar el algoritmo, y el umbral por histéresis, que une bordes que el ruido puede haber eliminado.
+
+Sin embargo, ya en las imágenes con ruido los filtros se comportan de manera muy errática.
+En la imagen contaminada con ruido sal y pimienta, un humano puede detectar los bordes casi a la perfección, pero nuestro algoritmo falla completamente, lo cual es un punto claramente débil.
 
 
 \end{document}
