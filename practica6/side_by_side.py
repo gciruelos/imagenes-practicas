@@ -8,6 +8,7 @@ def sbys(imgs, titles=None, argv=None, m=1):
     whs = list(map(lambda x: x.size, imgs))
     n = len(whs)
     gs = gridspec.GridSpec(m, n // m)
+    plt.figure(figsize=(14, 7))
 
     for i in range(n):
         plt.subplot(gs[i]).imshow(imgs[i], cmap='gray') #, vmin=0, vmax=255)

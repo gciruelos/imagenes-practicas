@@ -126,4 +126,6 @@ im3 = umbral_por_histeresis(supresion_de_no_maximos(jo, jm), jo)
 
 print(jo)
 print(jm)
-side_by_side.sbys([im1, im3])
+side_by_side.sbys([im1, im3],
+                  ["Original", 'Canny (con '+argv[2]+')'],
+                  argv=None if len(argv) <= 3 else argv[3])

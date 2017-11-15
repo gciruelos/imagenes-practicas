@@ -5,8 +5,8 @@ from PIL import Image
 from sys import argv
 import math
 
-LAPLACIAN_THRESHOLD = 50
-VARIANZA_THRESHOLD = 10
+LAPLACIAN_THRESHOLD = 20
+VARIANZA_THRESHOLD = 2.0
 
 laplaciano = np.zeros((3,3), dtype=np.float);
 laplaciano[1,1] = -4
@@ -31,16 +31,15 @@ def mediana_difs(im1):
                 if abs(p1-p2) > m: m = abs(p1-p2)
             l.append(m)
     r = sorted(l)[len(l) // 2]
-    print(r)
     return r
 
 def ej_a(im1):
     K1, K2 = im1.shape
     im2= convolution.convolution(im1, laplaciano)
-    r = np.zeros(im1.shape, dtype=float)
+    r = np.zeros(im1.shape, dtype=np.float)
     maximum = 0.0
     minimum = 0.0
-    median = mediana_difs(im2)
+    median = mediana_difs(im2) * 2.0
     for k1 in range(1,K1-1):
         for k2 in range(1, K2-1):
             indices = [((k1-1, k2-1), (k1+1, k2+1)),
@@ -53,6 +52,7 @@ def ej_a(im1):
                 p2 = im2[i2[0], i2[1]]
                 if p1 * p2 < 0 and abs(p1 - p2) > median:
                     found = True
+                    break
             r[k1, k2] = 255 if found else 0
     return r
 
@@ -80,7 +80,7 @@ def varianza_local(img, m, i_, j_):
                 continue
             else:
                 todos.append(math.pow(img[i_, j_] - media_local(img, m, i, j), 2)) 
-    return sum(todos) / len(todos)
+    return math.sqrt(sum(todos)) / len(todos)
 
 
     
@@ -88,10 +88,10 @@ def varianza_local(img, m, i_, j_):
 def ej_b(im1):
     K1, K2 = im1.shape
     im2= convolution.convolution(im1, laplaciano)
-    r = np.zeros(im1.shape, dtype=float)
+    r = np.zeros(im1.shape, dtype=np.float)
     maximum = 0.0
     minimum = 0.0
-    median = mediana_difs(im2)
+    mediana = mediana_difs(im2) * 2.0
     for k1 in range(1,K1-1):
         for k2 in range(1, K2-1):
             indices = [((k1-1, k2-1), (k1+1, k2+1)),
@@ -106,6 +106,7 @@ def ej_b(im1):
                 p2 = im2[i2[0], i2[1]]
                 if p1 * p2 < 0 and abs(p1 - p2) >= mediana:
                     found = True
+                    break
             r[k1, k2] = 255 if found else 0
     return r
 
@@ -119,16 +120,22 @@ def ej_c(im1):
         [4,16,26,16,4],
         [1,4,7,4,1]]
     gaussian[:,:] *= 1./273;
-    im2= convolution.convolution(im1, gaussian)
+    im2 = convolution.convolution(im1, gaussian)
     return ej_a(im2)
 
 
 im1 = np.asarray(Image.open(argv[1]).convert('L'))
+fname = "???"
 filtro = argv[2]
 if filtro == "a":
     im2 = ej_a(im1)
+    fname = "Metodo del Laplaciano"
 elif filtro == "b":
     im2 = ej_b(im1)
+    fname = "Metodo del Laplaciano con thershold de varianza"
 elif filtro == "c":
     im2 = ej_c(im1)
-side_by_side.sbys([im1, im2])
+    fname = "Metodo del Laplaciano del Gaussiano"
+side_by_side.sbys([im1, im2],
+                  ["Original", fname],
+                  argv=None if len(argv) <= 3 else argv[3])

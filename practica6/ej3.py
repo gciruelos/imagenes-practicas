@@ -42,4 +42,6 @@ def op_kirsch(im):
 
 im1 = np.asarray(Image.open(argv[1]).convert('L'))
 im2 = op_kirsch(im1)
-side_by_side.sbys([im1, im2])
+side_by_side.sbys([im1, im2],
+                  ["Original", 'Kirsch'],
+                  argv=None if len(argv) <= 2 else argv[2])
